@@ -1139,6 +1139,7 @@ struct UrlState {
    * browser, together with any user-supplied headers.
    */
   struct curl_slist *merged_headers;
+  int impersonate_headers_mode;
 
 #ifndef CURL_DISABLE_VERBOSE_STRINGS
   struct curl_trc_feat *feat; /* opt. trace feature transfer is part of */

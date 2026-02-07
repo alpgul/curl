@@ -1871,6 +1871,17 @@ void Curl_http_method(struct Curl_easy *data, struct connectdata *conn,
   *reqp = httpreq;
 }
 
+static bool is_non_static_header(const char *name, size_t len)
+{
+  /* Accept header */
+  if(len == 6 && curl_strnequal(name, "Accept", 6))
+    return true;
+  /* sec-fetch-* headers (case-insensitive) */
+  if(len >= 10 && curl_strnequal(name, "sec-fetch-", 10))
+    return true;
+  return false;
+}
+
 /*
  * curl-impersonate:
  * Create a new linked list of headers.
@@ -1916,7 +1927,13 @@ CURLcode Curl_http_merge_headers(struct Curl_easy *data)
       if(head2->data &&
          curl_strnequal(head2->data, head->data, prefix_len) &&
          Curl_headersep(head2->data[prefix_len]) ) {
-        new_list = curl_slist_append(new_list, head2->data);
+        if(data->state.impersonate_headers_mode == 3 &&
+           !is_non_static_header(head->data, prefix_len)) {
+          new_list = curl_slist_append(new_list, head->data);
+        }
+        else{
+          new_list = curl_slist_append(new_list, head2->data);
+        }
         /* Free and set to NULL to mark that it's been added. */
         Curl_safefree(head2->data);
         found = TRUE;
@@ -1925,11 +1942,14 @@ CURLcode Curl_http_merge_headers(struct Curl_easy *data)
     }
 
     /* If the user agent was set with CURLOPT_USERAGENT, but not with
-     * CURLOPT_HTTPHEADER, take it from there instead. */
+     * CURLOPT_HTTPHEADER, take it from there instead.
+     * BUT: skip this if we are in impersonate mode 3 and this is the User-Agent
+     * from the base headers, because we want to use the browser's UA. */
     if(!found &&
        curl_strnequal(head->data, "User-Agent", prefix_len) &&
        data->set.str[STRING_USERAGENT] &&
-       *data->set.str[STRING_USERAGENT]) {
+       *data->set.str[STRING_USERAGENT] &&
+       data->state.impersonate_headers_mode != 3) {
       uagent = aprintf("User-Agent: %s", data->set.str[STRING_USERAGENT]);
       if(!uagent) {
         ret = CURLE_OUT_OF_MEMORY;
@@ -1952,6 +1972,9 @@ CURLcode Curl_http_merge_headers(struct Curl_easy *data)
   /* Now go over any additional application-supplied headers. */
   for(head = dup; head; head = head->next) {
     if(head->data) {
+      /* Add any headers that weren't already processed in the first loop.
+       * If a header was already handled (either overridden or skipped),
+       * its data was freed and set to NULL in the first loop. */
       new_list = curl_slist_append(new_list, head->data);
       if(!new_list) {
         ret = CURLE_OUT_OF_MEMORY;
@@ -2983,13 +3006,15 @@ CURLcode Curl_http(struct Curl_easy *data, bool *done)
                    data->state.aptr.rangeline : "",
                    (data->set.str[STRING_USERAGENT] &&
                     *data->set.str[STRING_USERAGENT] &&
-                    data->state.aptr.uagent) ?
+                    data->state.aptr.uagent &&
+                    !data->state.merged_headers) ?
                    data->state.aptr.uagent : "",
                    "", // Accept
                    data->state.aptr.te ? data->state.aptr.te : "",
                    (data->set.str[STRING_ENCODING] &&
                     *data->set.str[STRING_ENCODING] &&
-                    data->state.aptr.accept_encoding) ?
+                    data->state.aptr.accept_encoding &&
+                    !data->state.merged_headers) ?
                    data->state.aptr.accept_encoding : "",
                    (data->state.referer && data->state.aptr.ref) ?
                    data->state.aptr.ref : "" /* Referer: <data> */,

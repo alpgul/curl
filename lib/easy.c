@@ -713,6 +713,13 @@ static CURLcode _do_impersonate(struct Curl_easy *data,
     if(ret)
       return ret;
   }
+  /* Enable automatic decompression when impersonate mode is active.
+   * Empty string means: use all built-in supported encodings (gzip, deflate, br, zstd) */
+  if(data->state.impersonate_headers_mode != 0) {
+    ret = curl_easy_setopt(data, CURLOPT_ACCEPT_ENCODING, "");
+    if(ret)
+      return ret;
+  }
 
   return CURLE_OK;
 }
@@ -836,15 +843,24 @@ CURL *curl_easy_init(void)
    * without code modifications to the app.
    */
   env_target = curl_getenv("CURL_IMPERSONATE");
+  if(!env_target) {
+    env_target = Curl_cstrdup("chrome145");
+  }
   if(env_target) {
     env_headers = curl_getenv("CURL_IMPERSONATE_HEADERS");
     if(env_headers) {
-      result = curl_easy_impersonate(data, env_target,
-                                     !curl_strequal(env_headers, "no"));
+      if(curl_strequal(env_headers, "3") || curl_strequal(env_headers, "browser"))
+        data->state.impersonate_headers_mode = 3;
+      else if(curl_strequal(env_headers, "no") || curl_strequal(env_headers, "0"))
+        data->state.impersonate_headers_mode = 0;
+      else
+        data->state.impersonate_headers_mode = 1;
+      result = curl_easy_impersonate(data, env_target, data->state.impersonate_headers_mode > 0);
       free(env_headers);
-    }
-    else {
-      result = curl_easy_impersonate(data, env_target, TRUE);
+  }
+  else {
+      data->state.impersonate_headers_mode = 3;
+      result = curl_easy_impersonate(data, env_target, true);
     }
     free(env_target);
     if(result) {
@@ -1599,15 +1615,24 @@ void curl_easy_reset(CURL *d)
    * from an environment variable, just like in curl_easy_init().
    */
   env_target = curl_getenv("CURL_IMPERSONATE");
+  if(!env_target) {
+    env_target = Curl_cstrdup("chrome145");
+  }
   if(env_target) {
     env_headers = curl_getenv("CURL_IMPERSONATE_HEADERS");
     if(env_headers) {
-      curl_easy_impersonate(data, env_target,
-                            !curl_strequal(env_headers, "no"));
+      if(curl_strequal(env_headers, "3") || curl_strequal(env_headers, "browser"))
+        data->state.impersonate_headers_mode = 3;
+      else if(curl_strequal(env_headers, "no") || curl_strequal(env_headers, "0"))
+        data->state.impersonate_headers_mode = 0;
+      else
+        data->state.impersonate_headers_mode = 1;
+      curl_easy_impersonate(data, env_target, data->state.impersonate_headers_mode > 0);
       free(env_headers);
     }
     else {
-      curl_easy_impersonate(data, env_target, TRUE);
+      data->state.impersonate_headers_mode = 3;
+      curl_easy_impersonate(data, env_target, true);
     }
     free(env_target);
   }

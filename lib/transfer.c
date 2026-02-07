@@ -642,7 +642,7 @@ CURLcode Curl_pretransfer(struct Curl_easy *data)
    * basically anything through an HTTP proxy we cannot limit this based on
    * protocol.
    */
-  if(data->set.str[STRING_USERAGENT]) {
+  if(data->set.str[STRING_USERAGENT] && !data->state.merged_headers) {
     free(data->state.aptr.uagent);
     data->state.aptr.uagent =
       aprintf("User-Agent: %s\r\n", data->set.str[STRING_USERAGENT]);
