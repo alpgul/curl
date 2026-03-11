@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: curl
 
-blank_issues_enabled: false
+blank_issues_enabled: true
 contact_links:
   - name: Ask a question (without email)
     url: https://github.com/curl/curl/discussions
