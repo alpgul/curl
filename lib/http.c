@@ -1899,6 +1899,7 @@ CURLcode Curl_http_merge_headers(struct Curl_easy *data)
   struct curl_slist *dup = NULL;
   struct curl_slist *new_list = NULL;
   char *uagent;
+  char *referer;
 
   if (!data->state.base_headers)
     return CURLE_OK;
@@ -1929,7 +1930,15 @@ CURLcode Curl_http_merge_headers(struct Curl_easy *data)
          Curl_headersep(head2->data[prefix_len]) ) {
         if(data->state.impersonate_headers_mode == 3 &&
            !is_non_static_header(head->data, prefix_len)) {
-          new_list = curl_slist_append(new_list, head->data);
+          /* Skip empty headers (no value after colon) */
+          const char *value = head->data + prefix_len + 1;
+          while(*value == ' ' || *value == '\t') value++;
+          if(*value != '\0') {
+            new_list = curl_slist_append(new_list, head->data);
+          }
+          else{
+            new_list = curl_slist_append(new_list, head2->data);
+          }
         }
         else{
           new_list = curl_slist_append(new_list, head2->data);
@@ -1956,6 +1965,18 @@ CURLcode Curl_http_merge_headers(struct Curl_easy *data)
         goto fail;
       }
       new_list = Curl_slist_append_nodup(new_list, uagent);
+      found = TRUE;
+    }
+
+    if(!found &&
+      curl_strnequal(head->data, "Referer", prefix_len) &&
+      data->state.referer ) {
+      referer = aprintf("Referer: %s", data->state.referer);
+      if(!referer){
+        ret = CURLE_OUT_OF_MEMORY;
+        goto fail;
+      }
+      new_list = curl_slist_append(new_list, referer);
       found = TRUE;
     }
 
