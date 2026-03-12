@@ -791,6 +791,7 @@ const struct impersonate_opts impersonations[] = {
       "Referer:",
       "Accept-Encoding: gzip, deflate, br, zstd",
       "Accept-Language: en-US,en;q=0.9",
+      "Range:",
       "Cookie:",
       "Priority: u=0, i"
     },

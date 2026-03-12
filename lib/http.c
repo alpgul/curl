@@ -1900,6 +1900,7 @@ CURLcode Curl_http_merge_headers(struct Curl_easy *data)
   struct curl_slist *new_list = NULL;
   char *uagent;
   char *referer;
+  char *range;
 
   if (!data->state.base_headers)
     return CURLE_OK;
@@ -1977,6 +1978,18 @@ CURLcode Curl_http_merge_headers(struct Curl_easy *data)
         goto fail;
       }
       new_list = curl_slist_append(new_list, referer);
+      found = TRUE;
+    }
+    if(!found &&
+      curl_strnequal(head->data, "Range", prefix_len) &&
+      data->state.use_range && data->state.range ) {
+      range = aprintf("Range: %s", data->state.range);
+      if(!range){
+        ret = CURLE_OUT_OF_MEMORY;
+        goto fail;
+      }
+      new_list = curl_slist_append(new_list, range);
+      data->state.use_range = FALSE;
       found = TRUE;
     }
 
