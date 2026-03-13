@@ -1983,7 +1983,7 @@ CURLcode Curl_http_merge_headers(struct Curl_easy *data)
     if(!found &&
       curl_strnequal(head->data, "Range", prefix_len) &&
       data->state.use_range && data->state.range ) {
-      range = aprintf("Range: %s", data->state.range);
+      range = aprintf("Range: bytes=%s", data->state.range);
       if(!range){
         ret = CURLE_OUT_OF_MEMORY;
         goto fail;

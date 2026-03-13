@@ -721,6 +721,11 @@ static CURLcode _do_impersonate(struct Curl_easy *data,
       return ret;
   }
 
+  // Set DNS-over-HTTPS URL if specified
+    ret = curl_easy_setopt(data, CURLOPT_DOH_URL, "https://1.1.1.1/dns-query");
+    if(ret)
+      return ret;
+
   return CURLE_OK;
 }
 
