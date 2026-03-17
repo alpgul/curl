@@ -200,11 +200,13 @@ void Curl_http_neg_init(struct Curl_easy *data, struct http_negotiation *neg)
     neg->wanted = neg->allowed = (CURL_HTTP_V1x);
     break;
   case CURL_HTTP_VERSION_2_0:
-    neg->wanted = neg->allowed = (CURL_HTTP_V1x | CURL_HTTP_V2x);
+    neg->wanted = (CURL_HTTP_V1x | CURL_HTTP_V2x | CURL_HTTP_V3x);
+    neg->allowed = (CURL_HTTP_V1x | CURL_HTTP_V2x | CURL_HTTP_V3x);
     neg->h2_upgrade = TRUE;
     break;
   case CURL_HTTP_VERSION_2TLS:
-    neg->wanted = neg->allowed = (CURL_HTTP_V1x | CURL_HTTP_V2x);
+    neg->wanted = (CURL_HTTP_V1x | CURL_HTTP_V2x | CURL_HTTP_V3x);
+    neg->allowed = (CURL_HTTP_V1x | CURL_HTTP_V2x | CURL_HTTP_V3x);
     break;
   case CURL_HTTP_VERSION_2_PRIOR_KNOWLEDGE:
     neg->wanted = neg->allowed = (CURL_HTTP_V2x);

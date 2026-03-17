@@ -194,7 +194,7 @@ static void cf_hc_reset(struct Curl_cfilter *cf, struct Curl_easy *data)
     ctx->state = CF_HC_INIT;
     ctx->result = CURLE_OK;
     ctx->hard_eyeballs_timeout_ms = data->set.happy_eyeballs_timeout;
-    ctx->soft_eyeballs_timeout_ms = data->set.happy_eyeballs_timeout / 4;
+      ctx->soft_eyeballs_timeout_ms = data->set.happy_eyeballs_timeout / 4;
   }
 }
 
@@ -669,44 +669,44 @@ CURLcode Curl_cf_https_setup(struct Curl_easy *data,
      * We are here after having selected a connection to a host+port and
      * can no longer change that. Any HTTPSRR advice for other hosts and ports
      * we need to ignore. */
-    struct Curl_dns_entry *dns = data->state.dns[sockindex];
-    struct Curl_https_rrinfo *rr = dns ? dns->hinfo : NULL;
-    if(rr && !rr->no_def_alpn &&  /* ALPNs are defaults */
-       (!rr->target ||      /* for same host */
-        !rr->target[0] ||
-        (rr->target[0] == '.' &&
-         !rr->target[1])) &&
-       (rr->port < 0 ||    /* for same port */
-        rr->port == conn->remote_port)) {
-      size_t i;
-      for(i = 0; i < CURL_ARRAYSIZE(rr->alpns) &&
-                 alpn_count < CURL_ARRAYSIZE(alpn_ids); ++i) {
-        enum alpnid alpn = rr->alpns[i];
-        if(cf_https_alpns_contain(alpn, alpn_ids, alpn_count))
-          continue;
-        switch(alpn) {
-        case ALPN_h3:
-          if(Curl_conn_may_http3(data, conn, conn->transport_wanted))
-            break;  /* not possible */
-          if(data->state.http_neg.allowed & CURL_HTTP_V3x) {
-            CURL_TRC_CF(data, cf, "adding h3 via HTTPS-RR");
-            alpn_ids[alpn_count++] = alpn;
-          }
-          break;
-        case ALPN_h2:
-          if(data->state.http_neg.allowed & CURL_HTTP_V2x) {
-            CURL_TRC_CF(data, cf, "adding h2 via HTTPS-RR");
-            alpn_ids[alpn_count++] = alpn;
-          }
-          break;
-        case ALPN_h1:
-          if(data->state.http_neg.allowed & CURL_HTTP_V1x) {
-            CURL_TRC_CF(data, cf, "adding h1 via HTTPS-RR");
-            alpn_ids[alpn_count++] = alpn;
-          }
-          break;
-        default: /* ignore */
-          break;
+      struct Curl_dns_entry *dns = data->state.dns[sockindex];
+      struct Curl_https_rrinfo *rr = dns ? dns->hinfo : NULL;
+      if(rr && !rr->no_def_alpn &&  /* ALPNs are defaults */
+         (!rr->target ||      /* for same host */
+          !rr->target[0] ||
+          (rr->target[0] == '.' &&
+           !rr->target[1])) &&
+         (rr->port < 0 ||    /* for same port */
+          rr->port == conn->remote_port)) {
+        size_t i;
+        for(i = 0; i < CURL_ARRAYSIZE(rr->alpns) &&
+                   alpn_count < CURL_ARRAYSIZE(alpn_ids); ++i) {
+          enum alpnid alpn = rr->alpns[i];
+          if(cf_https_alpns_contain(alpn, alpn_ids, alpn_count))
+            continue;
+          switch(alpn) {
+          case ALPN_h3:
+            if(Curl_conn_may_http3(data, conn, conn->transport_wanted))
+              break;  /* not possible */
+            if(data->state.http_neg.allowed & CURL_HTTP_V3x) {
+              infof(data, "HTTPS-CONNECT: adding h3 via HTTPS-RR");
+              alpn_ids[alpn_count++] = alpn;
+            }
+            break;
+          case ALPN_h2:
+            if(data->state.http_neg.allowed & CURL_HTTP_V2x) {
+              infof(data, "HTTPS-CONNECT: adding h2 via HTTPS-RR");
+              alpn_ids[alpn_count++] = alpn;
+            }
+            break;
+          case ALPN_h1:
+            if(data->state.http_neg.allowed & CURL_HTTP_V1x) {
+              infof(data, "HTTPS-CONNECT: adding h1 via HTTPS-RR");
+              alpn_ids[alpn_count++] = alpn;
+            }
+            break;
+          default: /* ignore */
+            break;
         }
       }
     }
@@ -726,16 +726,16 @@ CURLcode Curl_cf_https_setup(struct Curl_easy *data,
     if((alpn_count < CURL_ARRAYSIZE(alpn_ids)) &&
        (data->state.http_neg.wanted & CURL_HTTP_V2x) &&
        !cf_https_alpns_contain(ALPN_h2, alpn_ids, alpn_count)) {
-      CURL_TRC_CF(data, cf, "adding wanted h2");
+      infof(data, "HTTPS-CONNECT: adding wanted h2");
       alpn_ids[alpn_count++] = ALPN_h2;
     }
     else if((alpn_count < CURL_ARRAYSIZE(alpn_ids)) &&
-            (data->state.http_neg.wanted & CURL_HTTP_V1x) &&
-            !cf_https_alpns_contain(ALPN_h1, alpn_ids, alpn_count)) {
-      CURL_TRC_CF(data, cf, "adding wanted h1");
+       (data->state.http_neg.wanted & CURL_HTTP_V1x) &&
+       !cf_https_alpns_contain(ALPN_h1, alpn_ids, alpn_count)) {
+      infof(data, "HTTPS-CONNECT: adding wanted h1");
       alpn_ids[alpn_count++] = ALPN_h1;
     }
-  }
+    }
 
   /* If we identified ALPNs to use, install our filter. Otherwise,
    * install nothing, so our call will use a default connect setup. */
