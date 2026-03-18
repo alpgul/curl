@@ -462,23 +462,7 @@ static CURLcode _do_impersonate(struct Curl_easy *data,
     return CURLE_BAD_FUNCTION_ARGUMENT;
   }
 
-  // Prefer user set versions
-  long selected_http_version;
-  if (data->set.httpwant != CURL_HTTP_VERSION_NONE) {
-    ret = curl_easy_setopt(data, CURLOPT_HTTP_VERSION, data->set.httpwant);
-    selected_http_version = data->set.httpwant;
-  } else {
-    ret = curl_easy_setopt(data, CURLOPT_HTTP_VERSION, opts->httpversion);
-    selected_http_version = opts->httpversion;
-  }
-
-  if(ret)
-    return ret;
-
-  // Use impersonate ssl_version if user didn't set it.
-  if((data->set.ssl.primary.version == CURL_SSLVERSION_DEFAULT) &&
-     (data->set.ssl.primary.version_max == CURL_SSLVERSION_MAX_NONE) &&
-     (opts->ssl_version != CURL_SSLVERSION_DEFAULT)) {
+  if(opts->ssl_version) {
     ret = curl_easy_setopt(data, CURLOPT_SSLVERSION, opts->ssl_version);
     if(ret)
       return ret;

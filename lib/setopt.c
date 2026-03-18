@@ -330,7 +330,11 @@ static CURLcode setopt_HTTP_VERSION(struct Curl_easy *data, long arg)
   }
   data->set.httpwant = (unsigned char)arg;
 #ifdef USE_HTTP3
-  if((arg == CURL_HTTP_VERSION_3) || (arg == CURL_HTTP_VERSION_3ONLY)) {
+  if(arg == CURL_HTTP_VERSION_3) {
+    data->set.ssl.primary.version = CURL_SSLVERSION_TLSv1_2;
+    data->set.ssl.primary.version_max = CURL_SSLVERSION_MAX_TLSv1_3;
+  }
+  else if(arg == CURL_HTTP_VERSION_3ONLY) {
     data->set.ssl.primary.version = CURL_SSLVERSION_TLSv1_3;
     data->set.ssl.primary.version_max = CURL_SSLVERSION_MAX_NONE;
   }
