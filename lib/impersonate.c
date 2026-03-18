@@ -7,7 +7,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "chrome100",
     .alias = "chrome100",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -58,7 +58,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "chrome101",
     .alias = "chrome101",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -109,7 +109,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "chrome104",
     .alias = "chrome104",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -160,7 +160,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "chrome107",
     .alias = "chrome107",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -211,7 +211,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "chrome110",
     .alias = "chrome110",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -263,7 +263,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "chrome116",
     .alias = "chrome116",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -315,7 +315,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "chrome119",
     .alias = "chrome119",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -368,7 +368,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "chrome120",
     .alias = "chrome120",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -421,7 +421,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "chrome123",
     .alias = "chrome123",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -474,7 +474,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "chrome124",
     .alias = "chrome124",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -529,7 +529,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "chrome131",
     .alias = "chrome131",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -584,7 +584,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "chrome131_android",
     .alias = "chrome131_android",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -639,7 +639,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "chrome133a",
     .alias = "chrome133a",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -694,7 +694,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "chrome136",
     .alias = "chrome136",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -749,7 +749,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "chrome142",
     .alias = "chrome142",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -811,7 +811,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "chrome145",
     .alias = "chrome145",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -870,7 +870,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "chrome99",
     .alias = "chrome99",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -921,7 +921,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "chrome99_android",
     .alias = "chrome99_android",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -972,7 +972,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "edge101",
     .alias = "edge101",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -1023,7 +1023,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "edge99",
     .alias = "edge99",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -1073,7 +1073,7 @@ const struct impersonate_opts impersonations[] = {
   {
     .target = "firefox133",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_CHACHA20_POLY1305_SHA256:"
@@ -1139,7 +1139,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "firefox135",
     .alias = "firefox135",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_CHACHA20_POLY1305_SHA256:"
@@ -1205,7 +1205,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "firefox144",
     .alias = "firefox144",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_CHACHA20_POLY1305_SHA256:"
@@ -1272,7 +1272,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "firefox147",
     .alias = "firefox147",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_CHACHA20_POLY1305_SHA256:"
@@ -1343,7 +1343,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "okhttp4_android",
     .alias = "okhttp4", /* not working */
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_0 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_0 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -1406,7 +1406,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "safari153",
     .alias = "safari15_3",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_0 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_0 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -1473,7 +1473,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "safari155",
     .alias = "safari15_5",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_0 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_0 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -1535,7 +1535,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "safari170",
     .alias = "safari17_0",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_0 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_0 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -1600,7 +1600,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "safari172_ios",
     .alias = "safari17_2_ios",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_0 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_0 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -1665,7 +1665,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "safari180",
     .alias = "safari18_0",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_0 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_0 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -1730,7 +1730,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "safari180_ios",
     .alias = "safari18_0_ios",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_0 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_0 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -1795,7 +1795,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "safari184",
     .alias = "safari18_4",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_0 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_0 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -1860,7 +1860,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "safari184_ios",
     .alias = "safari18_4_ios",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_0 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_0 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -1925,7 +1925,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "safari260",
     .alias = "safari26_0",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_256_GCM_SHA384:"
       "TLS_CHACHA20_POLY1305_SHA256:"
@@ -1989,7 +1989,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "safari2601",
     .alias = "safari26_0_1",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_256_GCM_SHA384:"
       "TLS_CHACHA20_POLY1305_SHA256:"
@@ -2053,7 +2053,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "safari260_ios",
     .alias = "safari26_0_ios",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_AES_256_GCM_SHA384:"
@@ -2117,7 +2117,7 @@ const struct impersonate_opts impersonations[] = {
     .target = "tor145",  // tor 14.5, based on firefox 128
     .alias = "tor145",
     .httpversion = CURL_HTTP_VERSION_2_0,
-    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_DEFAULT,
+    .ssl_version = CURL_SSLVERSION_TLSv1_2 | CURL_SSLVERSION_MAX_TLSv1_3,
     .ciphers =
       "TLS_AES_128_GCM_SHA256:"
       "TLS_CHACHA20_POLY1305_SHA256:"
