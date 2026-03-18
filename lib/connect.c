@@ -396,6 +396,7 @@ struct eyeballer {
   BIT(shutdown);                     /* cf has shutdown */
   BIT(inconclusive);                 /* connect was not a hard failure, we
                                       * might talk to a restarting server */
+  unsigned char rewinds;             /* number of times addr list was rewound */
 };
 
 
@@ -570,9 +571,13 @@ static CURLcode baller_start_next(struct Curl_cfilter *cf,
     /* If we get inconclusive answers from the server(s), we start
      * again until this whole thing times out. This allows us to
      * connect to servers that are gracefully restarting and the
-     * packet routing to the new instance has not happened yet (e.g. QUIC). */
-    if(!baller->addr && baller->inconclusive)
+     * packet routing to the new instance has not happened yet (e.g. QUIC).
+     * But we limit the number of rewinds for a single baller, otherwise
+     * we might loop forever if the server just doesn't like our packets. */
+    if(!baller->addr && baller->inconclusive && (baller->rewinds < 2)) {
+      baller->rewinds++;
       baller_rewind(baller);
+    }
     baller_start(cf, data, baller, timeoutms);
   }
   else {
