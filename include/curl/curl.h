@@ -2361,6 +2361,9 @@ typedef enum {
   /* curl-impersonate: QUIC transport parameters, format: id:value;id:value */
   CURLOPT(CURLOPT_QUIC_TRANSPORT_PARAMETERS, CURLOPTTYPE_STRINGPOINT, 1027),
 
+  /* curl-impersonate: Set the TLS extensions order for HTTP/3 (QUIC). */
+  CURLOPT(CURLOPT_HTTP3_TLS_EXTENSION_ORDER, CURLOPTTYPE_STRINGPOINT, 1028),
+
   CURLOPT_LASTENTRY /* the last unused */
 } CURLoption;
 

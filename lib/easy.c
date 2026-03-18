@@ -636,17 +636,11 @@ static CURLcode _do_impersonate(struct Curl_easy *data,
   if(ret)
     return ret;
 
-  const char *tls_extension_order = opts->tls_extension_order;
-  if((selected_http_version == CURL_HTTP_VERSION_3 ||
-        selected_http_version == CURL_HTTP_VERSION_3ONLY) &&
-      opts->http3_tls_extension_order)
-    tls_extension_order = opts->http3_tls_extension_order;
-
-  if(tls_extension_order) {
+  if(opts->tls_extension_order) {
     char *permuted_order = NULL;
-    const char *order_to_set = tls_extension_order;
+    const char *order_to_set = opts->tls_extension_order;
     if(opts->tls_permute_extensions) {
-      ret = permute_extension_order(data, tls_extension_order,
+      ret = permute_extension_order(data, opts->tls_extension_order,
                                     &permuted_order);
       if(ret)
         return ret;
@@ -654,6 +648,24 @@ static CURLcode _do_impersonate(struct Curl_easy *data,
         order_to_set = permuted_order;
     }
     ret = curl_easy_setopt(data, CURLOPT_TLS_EXTENSION_ORDER,
+                           order_to_set);
+    free(permuted_order);
+    if(ret)
+      return ret;
+  }
+
+  if(opts->http3_tls_extension_order) {
+    char *permuted_order = NULL;
+    const char *order_to_set = opts->http3_tls_extension_order;
+    if(opts->tls_permute_extensions) {
+      ret = permute_extension_order(data, opts->http3_tls_extension_order,
+                                    &permuted_order);
+      if(ret)
+        return ret;
+      if(permuted_order)
+        order_to_set = permuted_order;
+    }
+    ret = curl_easy_setopt(data, CURLOPT_HTTP3_TLS_EXTENSION_ORDER,
                            order_to_set);
     free(permuted_order);
     if(ret)

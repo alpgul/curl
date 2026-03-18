@@ -178,6 +178,7 @@ struct OperationConfig {
   bool http2_no_priority;
   bool tls_grease;
   char *tls_extension_order;
+  char *http3_tls_extension_order;
   char *tls_delegated_credentials;
   long tls_record_size_limit;
   long tls_key_shares_limit;

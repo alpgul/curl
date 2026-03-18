@@ -1811,6 +1811,9 @@ static CURLcode setopt_cptr(struct Curl_easy *data, CURLoption option,
   case CURLOPT_TLS_EXTENSION_ORDER:
     return Curl_setstropt(&data->set.str[STRING_TLS_EXTENSION_ORDER], ptr);
     break;
+  case CURLOPT_HTTP3_TLS_EXTENSION_ORDER:
+    return Curl_setstropt(&data->set.str[STRING_HTTP3_TLS_EXTENSION_ORDER], ptr);
+    break;
   case CURLOPT_HTTP2_PSEUDO_HEADERS_ORDER:
     return Curl_setstropt(&data->set.str[STRING_HTTP2_PSEUDO_HEADERS_ORDER], ptr);
     break;

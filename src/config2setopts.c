@@ -438,6 +438,9 @@ static CURLcode ssl_setopts(struct OperationConfig *config, CURL *curl)
   if(config->tls_extension_order)
     my_setopt_str(curl, CURLOPT_TLS_EXTENSION_ORDER, config->tls_extension_order);
 
+  if(config->http3_tls_extension_order)
+    my_setopt_str(curl, CURLOPT_HTTP3_TLS_EXTENSION_ORDER, config->http3_tls_extension_order);
+
   if (config->tls_use_new_alps_codepoint)
     my_setopt(curl, CURLOPT_TLS_USE_NEW_ALPS_CODEPOINT, 1L);
 

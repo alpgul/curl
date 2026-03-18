@@ -4686,8 +4686,15 @@ CURLcode Curl_ossl_ctx_init(struct ossl_ctx *octx,
   }
 
   /* curl-impersonate: Set TLS extensions order. */
-  if(data->set.str[STRING_TLS_EXTENSION_ORDER]) {
-    SSL_CTX_set_extension_order(octx->ssl_ctx, data->set.str[STRING_TLS_EXTENSION_ORDER]);
+  {
+    const char *extension_order = data->set.str[STRING_TLS_EXTENSION_ORDER];
+    if(peer->transport == TRNSPRT_QUIC &&
+       data->set.str[STRING_HTTP3_TLS_EXTENSION_ORDER])
+      extension_order = data->set.str[STRING_HTTP3_TLS_EXTENSION_ORDER];
+
+    if(extension_order) {
+      SSL_CTX_set_extension_order(octx->ssl_ctx, extension_order);
+    }
   }
 
   if(data->set.str[STRING_TLS_DELEGATED_CREDENTIALS]) {
