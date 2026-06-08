@@ -432,6 +432,9 @@ static CURLcode ssl_setopts(struct OperationConfig *config, CURL *curl)
   if(config->ssl_permute_extensions)
     my_setopt(curl, CURLOPT_SSL_PERMUTE_EXTENSIONS, 1L);
 
+  if(config->tls_record_fragment)
+    my_setopt(curl, CURLOPT_TLS_RECORD_FRAGMENT, 1L);
+
   if(config->tls_grease)
     my_setopt(curl, CURLOPT_TLS_GREASE, 1L);
 

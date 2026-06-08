@@ -1461,6 +1461,9 @@ static CURLcode setopt_long(struct Curl_easy *data, CURLoption option,
   case CURLOPT_TLS_GREASE:
     data->set.tls_grease = enabled;
     break;
+  case CURLOPT_TLS_RECORD_FRAGMENT:
+    data->set.tls_record_fragment = enabled;
+    break;
   case CURLOPT_TLS_KEY_USAGE_NO_CHECK:
     data->set.tls_key_usage_no_check = enabled;
     break;

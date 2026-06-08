@@ -2376,6 +2376,10 @@ typedef enum {
   /* curl-impersonate: Comma-separated order for normal HTTP headers. */
   CURLOPT(CURLOPT_HTTPHEADER_ORDER, CURLOPTTYPE_STRINGPOINT, 1030),
 
+  /* curl-impersonate: TLS record fragmentation mode.
+   * 0 = disabled, 1 = split ClientHello before SNI extension. */
+  CURLOPT(CURLOPT_TLS_RECORD_FRAGMENT, CURLOPTTYPE_LONG, 1031),
+
   CURLOPT_LASTENTRY /* the last unused */
 } CURLoption;
 

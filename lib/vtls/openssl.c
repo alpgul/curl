@@ -4691,6 +4691,12 @@ CURLcode Curl_ossl_ctx_init(struct ossl_ctx *octx,
     SSL_CTX_set_permute_extensions(octx->ssl_ctx, 1);
   }
 
+  /* curl-impersonate: Enable TLS record fragmentation. */
+  if(data->set.tls_record_fragment) {
+    SSL_CTX_set_tls_record_fragment(octx->ssl_ctx,
+                                    SSL_TLS_RECORD_FRAG_BEFORE_SNI);
+  }
+
   /* curl-impersonate: Set TLS extensions order.
    * Use http3_tls_extension_order for QUIC if available. */
   {

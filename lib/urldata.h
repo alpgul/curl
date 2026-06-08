@@ -1684,6 +1684,7 @@ struct UserDefined {
   BIT(ssl_enable_ticket); /* TLS session ticket extension */
   BIT(ssl_permute_extensions); /* TLS Permute extensions */
   BIT(tls_grease);  /* TLS grease? */
+  BIT(tls_record_fragment); /* TLS record fragmentation (before SNI) */
   BIT(tls_key_usage_no_check);  /* TLS key_usage_check? */
   BIT(tls_signed_cert_timestamps);  /* TLS signed cert timestamps? */
   BIT(tls_status_request);  /* TLS status request */

@@ -191,6 +191,7 @@ struct OperationConfig {
   struct curl_slist *postquote;
   struct curl_slist *prequote;
   bool ssl_permute_extensions;
+  bool tls_record_fragment;
   struct curl_slist *headers;
   struct curl_slist *proxyheaders;
   struct tool_mime *mimeroot;
